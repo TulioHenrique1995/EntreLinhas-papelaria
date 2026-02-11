@@ -700,9 +700,25 @@ Fico no aguardo das informações sobre valores, prazos e opções disponíveis.
                                         <span className="text-xs font-bold border p-1 rounded">VISA</span>
                                         <span className="text-xs font-bold border p-1 rounded">MASTER</span>
                                     </div>
-                                    <div className="flex gap-4 text-pink-400">
-                                        <Instagram className="cursor-pointer hover:text-pink-600 transition-colors" />
-                                        <MessageCircle className="cursor-pointer hover:text-pink-600 transition-colors" />
+                                    <div className="flex gap-4 text-pink-400 items-center">
+                                        <a
+                                            href="https://www.instagram.com/entrelinhas.papelariacriativa?igsh=dHhtMG45ZjdtYnNv"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="hover:text-pink-600 transition-all transform hover:scale-110"
+                                            title="Siga nosso Instagram"
+                                        >
+                                            <Instagram size={32} />
+                                        </a>
+                                        <a
+                                            href="https://api.whatsapp.com/send?phone=5531995057791"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="hover:text-green-500 transition-all transform hover:scale-110"
+                                            title="Fale conosco no WhatsApp"
+                                        >
+                                            <MessageCircle size={32} />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
