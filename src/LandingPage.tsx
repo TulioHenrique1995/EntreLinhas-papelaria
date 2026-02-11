@@ -29,8 +29,8 @@ type Product = {
 // --- ENHANCED DATA ---
 const AGENDAS_LIST: Product[] = [
     { id: '1', name: "Agenda Floral Soft", price: "", category: 'agenda', image: "/agenda_real.jpg" },
-    { id: '2', name: "Planner Executivo", price: "", category: 'agenda', image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=600" },
-    { id: '3', name: "Agenda Clean Tone", price: "", category: 'agenda', image: "https://images.unsplash.com/photo-1522199618172-56f7f6a73c09?auto=format&fit=crop&q=80&w=600" },
+    { id: '2', name: "Planner Executivo", price: "", category: 'agenda', image: "/agenda_real.jpg" },
+    { id: '3', name: "Agenda Clean Tone", price: "", category: 'agenda', image: "/agenda_real.jpg" },
 ];
 
 const CADERNOS_LIST: Product[] = [
@@ -97,6 +97,8 @@ const LandingPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [showScrollTop, setShowScrollTop] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
     // Wizard State
     const [step, setStep] = useState(1);
@@ -107,10 +109,32 @@ const LandingPage = () => {
     const [schoolGrade, setSchoolGrade] = useState(''); // 'Série/Turma' for Caderno
     const [schoolSubject, setSchoolSubject] = useState(''); // 'Matéria' for Caderno
 
+    // Festa States
+    const [partyTheme, setPartyTheme] = useState('');
+    const [partyAge, setPartyAge] = useState('');
+    const [partyDate, setPartyDate] = useState('');
+
     // Carousel States
     const [agendaIndex, setAgendaIndex] = useState(0);
     const [cadernoIndex, setCadernoIndex] = useState(0);
     const [festaIndex, setFestaIndex] = useState(0);
+
+    // Scroll to top button visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY > 400);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Toast auto-hide
+    useEffect(() => {
+        if (showToast) {
+            const timer = setTimeout(() => setShowToast(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [showToast]);
 
     // Carousel Helper
     const renderCarousel = (items: Product[], currentIndex: number, setIndex: (i: any) => void, onSelect: (p: Product) => void, variant: 'portrait' | 'square' = 'portrait') => {
@@ -183,10 +207,6 @@ const LandingPage = () => {
         );
     };
 
-    // Party Specific State
-    const [partyAge, setPartyAge] = useState('');
-    const [partyTheme, setPartyTheme] = useState('');
-    const [partyDate, setPartyDate] = useState('');
 
     const [heroIndex, setHeroIndex] = useState(0);
 
@@ -219,8 +239,30 @@ const LandingPage = () => {
         setModalOpen(true);
     }
 
+    // Validate if user can proceed to next step
+    const canProceedToNextStep = (): boolean => {
+        if (step === 1) {
+            return selectedProduct !== null;
+        }
+        if (step === 2) {
+            // Check required fields based on product category
+            if (selectedProduct?.category === 'festa') {
+                return customName.trim() !== '' && partyTheme.trim() !== '';
+            }
+            if (selectedProduct?.category === 'caderno') {
+                return customName.trim() !== '' && themePreference.trim() !== '';
+            }
+            if (selectedProduct?.category === 'agenda') {
+                return customName.trim() !== '' && themePreference.trim() !== '';
+            }
+        }
+        return true;
+    };
+
     const handleNextStep = () => {
-        if (step < 3) setStep(step + 1);
+        if (canProceedToNextStep() && step < 3) {
+            setStep(step + 1);
+        }
     };
 
     const handlePrevStep = () => {
@@ -254,9 +296,18 @@ const LandingPage = () => {
                 `- Ano: 2026`;
         }
 
+        // TODO: SUBSTITUIR PELO NÚMERO REAL DO WHATSAPP
         const url = `https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
+
+        // Show success feedback
+        setShowToast(true);
         setModalOpen(false);
+    };
+
+    // Scroll to top function
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
@@ -264,6 +315,7 @@ const LandingPage = () => {
             {/* --- FONTS --- */}
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito+Sans:wght@300;400;600;700&family=Rubik:wght@400;500;700&display=swap');
+        html { scroll-behavior: smooth; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Rubik', sans-serif; }
         .font-brand { font-family: 'Dancing Script', cursive; }
         body { font-family: 'Nunito Sans', sans-serif; }
@@ -518,7 +570,7 @@ const LandingPage = () => {
 
                     <div className="grid md:grid-cols-3 gap-6 justify-items-center">
                         {VIDEOS.map((video) => (
-                            <div key={video.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 w-full max-w-[300px]">
+                            <div key={video.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 w-full max-w-[250px] md:max-w-[300px]">
                                 {/* Formato 9:16 (TikTok/Reels) */}
                                 <div className="relative w-full bg-gray-900" style={{ aspectRatio: '9 / 16' }}>
                                     {video.type === 'local' ? (
@@ -937,8 +989,8 @@ const LandingPage = () => {
                                 {step < 3 ? (
                                     <button
                                         onClick={handleNextStep}
-                                        disabled={step === 1 && !selectedProduct}
-                                        className={`px-8 py-3 rounded-xl font-bold text-white flex items-center gap-2 ${step === 1 && !selectedProduct ? 'bg-gray-300' : 'bg-pink-500 hover:bg-pink-600'}`}
+                                        disabled={!canProceedToNextStep()}
+                                        className={`px-8 py-3 rounded-xl font-bold text-white flex items-center gap-2 transition-all ${!canProceedToNextStep() ? 'bg-gray-300 cursor-not-allowed' : 'bg-pink-500 hover:bg-pink-600'}`}
                                     >
                                         Próximo <ChevronRight size={18} />
                                     </button>
@@ -952,6 +1004,36 @@ const LandingPage = () => {
                     </div>
                 )
             }
+
+            {/* Toast de Feedback */}
+            {showToast && (
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 50 }}
+                    className="fixed bottom-8 right-8 z-50 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3"
+                >
+                    <CheckCircle size={24} />
+                    <div>
+                        <div className="font-bold">Redirecionando para WhatsApp!</div>
+                        <div className="text-sm opacity-90">Aguarde um momento...</div>
+                    </div>
+                </motion.div>
+            )}
+
+            {/* Bot\u00e3o Voltar ao Topo */}
+            {showScrollTop && (
+                <motion.button
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    onClick={scrollToTop}
+                    className="fixed bottom-8 right-8 z-40 bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110"
+                    aria-label="Voltar ao topo"
+                >
+                    <ChevronRight size={24} className="rotate-[-90deg]" />
+                </motion.button>
+            )}
         </div >
     );
 };
