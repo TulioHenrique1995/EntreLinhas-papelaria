@@ -549,17 +549,6 @@ const LandingPage = () => {
                             </div>
                         ))}
                     </div>
-
-                    <div className="mt-12 text-center bg-pink-50 p-6 rounded-xl">
-                        <h3 className="font-bold text-pink-700 mb-3">📹 Como adicionar seus vídeos:</h3>
-                        <ol className="text-left max-w-2xl mx-auto space-y-2 text-sm text-gray-700">
-                            <li><strong>1.</strong> Baixe o vídeo do Instagram/TikTok (use sites como SaveFrom.net)</li>
-                            <li><strong>2.</strong> Renomeie para: <code className="bg-white px-2 py-1 rounded">video_agenda.mp4</code>, <code className="bg-white px-2 py-1 rounded">video_caderno.mp4</code>, <code className="bg-white px-2 py-1 rounded">video_festa.mp4</code></li>
-                            <li><strong>3.</strong> Coloque os arquivos na pasta <code className="bg-white px-2 py-1 rounded">public</code> do projeto</li>
-                            <li><strong>4.</strong> Pronto! Os vídeos vão tocar direto no site ✅</li>
-                        </ol>
-                        <p className="text-xs text-gray-500 mt-4">💡 Alternativa: Use YouTube para embeds mais fáceis</p>
-                    </div>
                 </div>
             </section>
 
