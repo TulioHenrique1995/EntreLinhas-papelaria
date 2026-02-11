@@ -72,22 +72,22 @@ const VIDEOS = [
     {
         id: 1,
         title: "Agenda Personalizada",
-        type: 'local', // 'local' para arquivos .mp4 na pasta public, 'embed' para YouTube/Instagram
-        url: "/video_agenda.mp4", // Coloque o arquivo video_agenda.mp4 na pasta public
+        type: 'local' as const,
+        url: "/video_agenda.mp4.mp4",
         thumbnail: "/agenda_real.jpg"
     },
     {
         id: 2,
         title: "Caderno Temático",
-        type: 'local',
-        url: "/video_caderno.mp4", // Coloque o arquivo video_caderno.mp4 na pasta public
+        type: 'local' as const,
+        url: "/video_caderno.mp4.mp4",
         thumbnail: "/hero_spider.jpg"
     },
     {
         id: 3,
         title: "Kit Festa Completo",
-        type: 'local',
-        url: "/video_festa.mp4.mp4", // Arquivo encontrado na pasta public
+        type: 'local' as const,
+        url: "/video_festa.mp4.mp4",
         thumbnail: "/festa_1.jpg"
     }
 ];
@@ -526,6 +526,7 @@ const LandingPage = () => {
                                             src={video.url}
                                             poster={video.thumbnail}
                                             controls
+                                            muted
                                             className="w-full h-full object-cover"
                                             preload="metadata"
                                         >
