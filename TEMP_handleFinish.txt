@@ -1,0 +1,43 @@
+    const handleFinish = () => {
+        let msg = '';
+
+        if (selectedProduct?.category === 'festa') {
+            msg = `Olá! 😊 Gostaria de solicitar um orçamento para um *Kit de Festa Personalizado*.
+
+🎉 *Detalhes do pedido:*
+• Tema: ${partyTheme || '______'}
+• Nome do aniversariante: ${customName || '______'}
+• Idade: ${partyAge || '______'}
+• Data do evento: ${partyDate || '______'}
+
+Fico no aguardo das informações sobre valores, prazos e opções disponíveis. Obrigado(a)!`;
+        } else if (selectedProduct?.category === 'caderno') {
+            msg = `Olá! 😊 Gostaria de solicitar um orçamento para um *Caderno Escolar Personalizado*.
+
+📘 *Detalhes do pedido:*
+• Tema: ${themePreference || '______'}
+• Nome do aluno: ${customName || '______'}
+• Série/Turma: ${schoolGrade || '______'}
+• Matéria: ${schoolSubject || '______'}
+
+Fico no aguardo das informações sobre valores, prazos e opções disponíveis. Obrigado(a)!`;
+        } else {
+            // Agenda or Default
+            msg = `Olá! 😊 Gostaria de solicitar um orçamento para uma *Agenda 2026 Personalizada*.
+
+📅 *Detalhes do pedido:*
+• Tema da capa: ${themePreference || '______'}
+• Nome na capa: ${customName || '______'}
+• Ano: 2026 - Edição Completa
+
+Fico no aguardo das informações sobre valores, prazos e opções disponíveis. Obrigado(a)!`;
+        }
+
+        // WhatsApp API - Compat Copível com WhatsApp e WhatsApp Business
+        const url = `https://api.whatsapp.com/send?phone=5531995057791&text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+        
+        // Show success feedback
+        setShowToast(true);
+        setModalOpen(false);
+    };
