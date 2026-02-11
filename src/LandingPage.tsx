@@ -297,7 +297,7 @@ const LandingPage = () => {
         }
 
         // TODO: SUBSTITUIR PELO NÚMERO REAL DO WHATSAPP
-        const url = `https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`;
+        const url = `https://wa.me/5531995057791?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
 
         // Show success feedback
