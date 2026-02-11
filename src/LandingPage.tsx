@@ -296,8 +296,8 @@ const LandingPage = () => {
                 `- Ano: 2026`;
         }
 
-        // TODO: SUBSTITUIR PELO NÚMERO REAL DO WHATSAPP
-        const url = `https://wa.me/5531995057791?text=${encodeURIComponent(msg)}`;
+        // WhatsApp API - Compatível com WhatsApp e WhatsApp Business
+        const url = `https://api.whatsapp.com/send?phone=5531995057791&text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
 
         // Show success feedback
