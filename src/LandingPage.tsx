@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Star,
@@ -12,8 +12,6 @@ import {
     Menu,
     X,
     Palette,
-    Layout,
-    Clock,
     ChevronRight,
     ChevronLeft
 } from 'lucide-react';
@@ -28,13 +26,6 @@ type Product = {
 };
 
 // --- DATA ---
-const PRODUCTS: Product[] = [
-    { id: '1', name: "Agenda Floral Soft", price: "R$ 89,90", category: 'agenda', image: "/agenda_real.jpg" },
-    { id: '2', name: "Planner Executivo", price: "R$ 120,00", category: 'agenda', image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=600" },
-    { id: '3', name: "Agenda Clean Tone", price: "R$ 79,90", category: 'agenda', image: "https://images.unsplash.com/photo-1522199618172-56f7f6a73c09?auto=format&fit=crop&q=80&w=600" },
-];
-
-// --- ENHANCED DATA ---
 // --- ENHANCED DATA ---
 const AGENDAS_LIST: Product[] = [
     { id: '1', name: "Agenda Floral Soft", price: "", category: 'agenda', image: "/agenda_real.jpg" },
@@ -110,7 +101,6 @@ const LandingPage = () => {
     // Wizard State
     const [step, setStep] = useState(1);
     const [customName, setCustomName] = useState(''); // Used for Name on Cover / Student Name / Birthday Person
-    const [coverTheme, setCoverTheme] = useState('floral'); // Keep for backward compatibility if needed, but prefer themePreference
 
     // Specific States for Product Types
     const [themePreference, setThemePreference] = useState(''); // 'Tema da Agenda' or 'Tema do Caderno'
@@ -154,7 +144,7 @@ const LandingPage = () => {
                 {/* Items */}
                 <div className="flex items-center justify-center w-full relative h-full">
                     <AnimatePresence mode='popLayout'>
-                        {getVisibleItems().map((item, i) => {
+                        {getVisibleItems().map((item) => {
                             const isCenter = item.position === 'center';
                             return (
                                 <motion.div
