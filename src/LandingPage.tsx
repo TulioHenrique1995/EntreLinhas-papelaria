@@ -693,35 +693,45 @@ const LandingPage = () => {
                                             {/* Agendas */}
                                             <div
                                                 onClick={() => setSelectedProduct({ id: 'agenda', name: 'Agenda 2026', price: '', category: 'agenda', image: '/agenda_real.jpg' })}
-                                                className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${selectedProduct?.category === 'agenda' ? 'border-pink-500 bg-pink-50' : 'border-gray-100 hover:border-pink-200'}`}
+                                                className={`group border-2 rounded-xl cursor-pointer transition-all overflow-hidden ${selectedProduct?.category === 'agenda' ? 'border-pink-500 bg-pink-50 shadow-lg' : 'border-gray-200 hover:border-pink-300 hover:shadow-md'}`}
                                             >
-                                                <img src="/agenda_real.jpg" className="w-full h-32 object-contain rounded-lg mb-2 bg-white p-1" alt="Agenda" />
-                                                <div className="font-bold text-base text-center">Agenda</div>
-                                                <div className="text-pink-500 text-xs font-bold text-center">Orçamento</div>
+                                                <div className="aspect-square w-full bg-gradient-to-br from-pink-50 to-white p-4 flex items-center justify-center">
+                                                    <img src="/agenda_real.jpg" className="max-w-full max-h-full object-contain drop-shadow-md" alt="Agenda" />
+                                                </div>
+                                                <div className="p-3 bg-white border-t border-pink-100">
+                                                    <div className="font-bold text-base text-center text-gray-800">Agenda</div>
+                                                    <div className="text-pink-500 text-xs font-bold text-center mt-1">Orçamento</div>
+                                                </div>
                                             </div>
 
                                             {/* Cadernos */}
                                             <div
                                                 onClick={() => setSelectedProduct({ id: 'caderno', name: 'Caderno Escolar', price: '', category: 'caderno', image: '/hero_spider.jpg' })}
-                                                className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${selectedProduct?.category === 'caderno' ? 'border-pink-500 bg-pink-50' : 'border-gray-100 hover:border-pink-200'}`}
+                                                className={`group border-2 rounded-xl cursor-pointer transition-all overflow-hidden ${selectedProduct?.category === 'caderno' ? 'border-pink-500 bg-pink-50 shadow-lg' : 'border-gray-200 hover:border-pink-300 hover:shadow-md'}`}
                                             >
-                                                <img src="/hero_spider.jpg" className="w-full h-32 object-contain rounded-lg mb-2 bg-white p-1" alt="Caderno" />
-                                                <div className="font-bold text-base text-center">Cadernos</div>
-                                                <div className="text-pink-500 text-xs font-bold text-center">Orçamento</div>
+                                                <div className="aspect-square w-full bg-gradient-to-br from-blue-50 to-white p-4 flex items-center justify-center">
+                                                    <img src="/hero_spider.jpg" className="max-w-full max-h-full object-contain drop-shadow-md" alt="Caderno" />
+                                                </div>
+                                                <div className="p-3 bg-white border-t border-pink-100">
+                                                    <div className="font-bold text-base text-center text-gray-800">Cadernos</div>
+                                                    <div className="text-pink-500 text-xs font-bold text-center mt-1">Orçamento</div>
+                                                </div>
                                             </div>
 
                                             {/* Kits Personalizados */}
                                             <div
                                                 onClick={() => setSelectedProduct({ id: 'festa', name: 'Kit Festa Personalizado', price: '', category: 'festa', image: '/festa_1.jpg' })}
-                                                className={`p-4 border-2 rounded-xl cursor-pointer transition-all col-span-2 ${selectedProduct?.category === 'festa' ? 'border-pink-500 bg-pink-50' : 'border-gray-100 hover:border-pink-200'}`}
+                                                className={`col-span-2 group border-2 rounded-xl cursor-pointer transition-all overflow-hidden ${selectedProduct?.category === 'festa' ? 'border-pink-500 bg-pink-50 shadow-lg' : 'border-gray-200 hover:border-pink-300 hover:shadow-md'}`}
                                             >
-                                                <div className="flex items-center gap-4">
-                                                    <img src="/festa_1.jpg" className="w-24 h-24 object-cover rounded-lg bg-white" alt="Kits" />
-                                                    <div className="flex-1">
-                                                        <div className="font-bold text-base mb-1">Kits Personalizados</div>
-                                                        <div className="text-pink-500 text-xs font-bold">Sob Medida</div>
+                                                <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-purple-50 via-pink-50 to-white">
+                                                    <div className="w-24 h-24 flex-shrink-0 bg-white rounded-lg p-2 shadow-sm">
+                                                        <img src="/festa_1.jpg" className="w-full h-full object-cover rounded" alt="Kits" />
                                                     </div>
-                                                    <Gift size={32} className="text-pink-400" />
+                                                    <div className="flex-1">
+                                                        <div className="font-bold text-lg text-gray-800">Kits Personalizados</div>
+                                                        <div className="text-pink-500 text-xs font-bold mt-1">Sob Medida</div>
+                                                    </div>
+                                                    <Gift size={32} className="text-pink-400 flex-shrink-0" />
                                                 </div>
                                             </div>
                                         </div>
